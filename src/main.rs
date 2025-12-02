@@ -1,5 +1,6 @@
 mod naive;
 mod single_thread_optimized;
+mod single_thread_optimized_mmap;
 
 #[derive(Parser)]
 struct Cli {
@@ -12,7 +13,7 @@ struct Cli {
 
 use clap::Parser;
 
-const LATEST: &str = "single_thread_optimized";
+const LATEST: &str = "single_thread_optimized_mmap";
 
 fn main() {
     let cli = Cli::parse();
@@ -26,6 +27,7 @@ fn main() {
     match module {
         "naive" => naive::run(file_path),
         "single_thread_optimized" => single_thread_optimized::run(file_path),
+        "single_thread_optimized_mmap" => single_thread_optimized_mmap::run(file_path),
         _ => {
             panic!("Unknown module: {}", module);
         }
